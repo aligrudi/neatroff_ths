@@ -1,0 +1,167 @@
+.\" Internal registers
+.nr ths.sh 0		\" just following section headers
+.nr ths.in 0		\" current indentation
+.nr ths.pg 1		\" page style (0: off, 1: numbers, 2: abc, 3: x-num)
+.nr ths.1st 0		\" the first page
+.nr ths.s 0		\" current section number
+.nr ths.s1 0		\" current subsection number (depth 1)
+.nr ths.s2 0		\" current subsection number (depth 2)
+.nr ths.f 0		\" current figure number
+.nr ths.t 0		\" current table number
+.ds fa.cl #442222	\" fa colour
+.\" Managing internal references
+.de ths.doubledef
+.	if \\n[\\$1.d] .tm \\n(.F:\\n(.c: \\$1 redefined
+.	nr \\$1.d 1
+..
+.\" Section/subsection headers
+.de S0.ref
+.	ds rref "__\\$1
+.	ds rdef "\>\\n[ths.s]\<
+.	ths.doubledef \\*[rref]
+.	tm .ds \\*[rref] \\*[rdef]
+.	tm .ths.s0 "\\n%" "\\*[rdef]" "\\$2"
+..
+.de S0
+.	keepeof
+.	if \\n[ths.s] .bp
+.	nr ths.s +1
+.	nr ths.s1 0
+.	nr ths.s2 0
+.	nr ths.f 0
+.	nr ths.t 0
+.	ds rref "__\\$1
+.	if \\n[ths.idx] .S0.ref "\\$1" "\\$2"
+.	TL
+.	ad r
+.	ps 30
+فصل \\*[\\*[rref]]
+.	sp
+.	ps 40
+.	ad c
+\\$2\s0
+.	sp 4
+.	LP
+..
+.de S_
+.	keepeof
+.	if \\n[ths.s] .bp
+.	RT
+.	TL "\\$2"
+..
+.de S1.ref
+.	ds rref "__\\$1
+.	ds rdef "\>\\n[ths.s]\<-\>\\n[ths.s1]\<
+.	ths.doubledef \\*[rref]
+.	tm .ds \\*[rref] \\*[rdef]
+.	tm .ths.s1 "\\n%" "\\*[rdef]" "\\$2"
+..
+.de S1
+.	RT
+.	nr ths.s1 +1
+.	nr ths.s2 0
+.	if \\n[ths.idx] .S1.ref "\\$1" "\\$2"
+.	ds rref "__\\$1
+.	SH "\\*[\\*[rref]]\h'1n'\\$2"
+..
+.de S2.ref
+.	ds rref "__\\$1
+.	ds rdef "\>\\n[ths.s]\<-\>\\n[ths.s1]\<-\>\\n[ths.s2]\<
+.	ths.doubledef \\*[rref]
+.	tm .ds \\*[rref] \\*[rdef]
+.	tm .ths.s2 "\\n%" "\\*[rdef]" "\\$2"
+..
+.de S2
+.	RT
+.	nr ths.s2 +1
+.	if \\n[ths.idx] S2.ref "\\$1" "\\$2"
+.	ds rref "__\\$1
+.	SH "\\*[\\*[rref]]\h'1n'\\$2"
+..
+.\" Figure caption
+.de F1.ref
+.	ds rref "__\\$1
+.	ds rdef "\>\\n[ths.s]\<-\>\\n[ths.f]\<
+.	ths.doubledef \\*[rref]
+.	tm .ds \\*[rref] "\\*[rdef]
+.	tm .ths.f1 \\n% "\\*[rdef]" "\\$2"
+..
+.de F1
+.	RT
+.	nr ths.f +1
+.	if \\n[ths.idx] .F1.ref "\\$1" "\\$2"
+.	ds rref "__\\$1
+.	ad c
+.	ps \\n(PS-2
+.	vs \\n(VS-4
+شکل \\*[\\*[rref]]\h'2n'
+\\$2
+..
+.\" Table caption
+.de T1.ref
+.	ds rref "__\\$1
+.	ds rdef "\>\\n[ths.s]\<-\>\\n[ths.t]\<
+.	ths.doubledef \\*[rref]
+.	tm .ds \\*[rref] "\\*[rdef]
+.	tm .ths.t1 \\n% "\\*[rdef]" "\\$2"
+..
+.de T1
+.	RT
+.	nr ths.t +1
+.	if \\n[ths.idx] .T1.ref "\\$1" "\\$2"
+.	ds rref "__\\$1
+.	ad c
+.	ps \\n(PS-2
+جدول \\*[\\*[rref]]\h'2n'
+\\$2
+..
+.\" Internal references
+.de ref
+\%\\*[__\\$1]\c
+.	if !\\n[ths.idx] .if "\\*[__\\$1]"" .tm \\n(.F:\\n(.c: \\$1 undefined
+.	if "\\*[__\\$1]"" \l'2n'
+\&
+..
+.chop ref
+.de FT.pg
+.	if \\n[ths.pg]=0 'tl '''
+.	if \\n[ths.pg]=1 'tl ''\>%\<''
+.	if \\n[ths.pg]=2 'tl ''\\*[abjad.\\n%]''
+..
+.de ths.en2fa
+.	nf
+.	ta \\n(.luR
+\\$1\h'1n' \a \h'1n'\\*[en "\\$2"]
+..
+.\" Abjad letters
+.ds abjad.1 "الف
+.ds abjad.2 "ب
+.ds abjad.3 "ج
+.ds abjad.4 "د
+.ds abjad.5 "ه
+.ds abjad.6 "و
+.ds abjad.7 "ز
+.ds abjad.8 "ح
+.ds abjad.9 "ط
+.ds abjad.10 "ی
+.ds abjad.11 "ک
+.ds abjad.12 "ل
+.ds abjad.13 "م
+.ds abjad.14 "ن
+.ds abjad.15 "س
+.ds abjad.16 "ع
+.ds abjad.17 "ف
+.ds abjad.18 "ص
+.so .ths.tr
+.EQ
+grfont CMR
+gfont CMMI
+define sum @{vcenter roman "\N'summationdisplay'"}@
+define tsum @{vcenter roman "\N'summationtext'"}@
+define prod @{vcenter roman "\N'productdisplay'"}@
+define tprod @{vcenter roman "\N'producttext'"}@
+define small @size -4@
+chartype ord .
+chartype bin \(rs
+delim $$
+.EN

@@ -1,0 +1,20 @@
+NEATROFF THS PACKAGE
+====================
+
+The thesis is divided into two parts: ths.ms contains thesis
+chapters and toc.ms the first few pages (title and table
+of contents).
+
+To use this package, Neatroff has to be set up first:
+
+$ git clone git://github.com/litcave/neatroff_make.git
+$ cd neatroff_make/
+$ make init_fa
+$ make neat
+
+The following commands obtain and initialize the ths
+package in neatroff_make/ths:
+
+$ git clone git://github.com/nit-ce/neatroff_ths.git ths
+$ cd ths
+$ make
