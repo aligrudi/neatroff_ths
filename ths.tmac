@@ -1,14 +1,12 @@
 .\" Internal registers
-.nr ths.sh 0		\" just following section headers
 .nr ths.in 0		\" current indentation
-.nr ths.pg 1		\" page style (0: off, 1: numbers, 2: abc, 3: x-num)
-.nr ths.1st 0		\" the first page
+.nr ths.pg 1		\" page style (0: off, 1: numbers, 2: abjad)
 .nr ths.s 0		\" current section number
 .nr ths.s1 0		\" current subsection number (depth 1)
 .nr ths.s2 0		\" current subsection number (depth 2)
 .nr ths.f 0		\" current figure number
 .nr ths.t 0		\" current table number
-.ds fa.cl #442222	\" fa colour
+.ds fa.cl #442222	\" section header colour
 .\" Managing internal references
 .de ths.doubledef
 .	if \\n[\\$1.d] .tm \\n(.F:\\n(.c: \\$1 redefined
@@ -20,7 +18,7 @@
 .	ds rdef "\>\\n[ths.s]\<
 .	ths.doubledef \\*[rref]
 .	tm .ds \\*[rref] \\*[rdef]
-.	tm .ths.s0 "\\n%" "\\*[rdef]" "\\$2"
+.	tm .ths.s0 \\n% "\\*[rdef]" "\\$2"
 ..
 .de S0
 .	keepeof
@@ -54,7 +52,7 @@
 .	ds rdef "\>\\n[ths.s]\<-\>\\n[ths.s1]\<
 .	ths.doubledef \\*[rref]
 .	tm .ds \\*[rref] \\*[rdef]
-.	tm .ths.s1 "\\n%" "\\*[rdef]" "\\$2"
+.	tm .ths.s1 \\n% "\\*[rdef]" "\\$2"
 ..
 .de S1
 .	RT
