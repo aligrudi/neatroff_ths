@@ -1,4 +1,4 @@
-# Neatroff demonstration directory
+# BASE should point to neatroff_make/
 BASE = $(PWD)/..
 ROFF = $(BASE)/neatroff/roff
 POST = $(BASE)/neatpost/post
@@ -14,20 +14,20 @@ all: ths.pdf toc.pdf
 
 ths.ps: ths.ms ths.tmac
 	@echo "Indexing labels in ths.ms"
-	@cat $< | $(SOIN) | $(SHAPE) | $(PIC) | $(TBL) | $(EQN) | \
-		$(REFER) -m -e -o ct -p ref.bib | \
+	@cat $< | $(SOIN) | $(SHAPE) | \
+		$(REFER) -m -e -o ct -p ref.bib | $(PIC) | $(TBL) | $(EQN) | \
 		$(ROFF) -rths.idx=1 -meps -mtbl -mkeep -mfa -msrefs 2>&1 1>/dev/null | \
 		tee .ths.err | sed '/^\./d'
 	@sed '/^\./p; d' <.ths.err >.ths.tr
 	@echo "Generating ths.ps"
-	@cat $< | $(SOIN) | $(SHAPE) | $(PIC) | $(TBL) | $(EQN) | \
-		$(REFER) -m -e -o ct -p ref.bib | \
+	@cat $< | $(SOIN) | $(SHAPE) | \
+		$(REFER) -m -e -o ct -p ref.bib | $(PIC) | $(TBL) | $(EQN) | \
 		$(ROFF) -meps -mtbl -mkeep -mfa -msrefs | $(POST) -pa4 >$@
 
 toc.ps: toc.ms ths.ps
 	@echo "Generating toc.ps"
-	@cat toc.ms | $(SOIN) | $(SHAPE) | $(PIC) | $(TBL) | $(EQN) | \
-		$(REFER) -m -e -o ct -p ref.bib | \
+	@cat toc.ms | $(SOIN) | $(SHAPE) | \
+		$(REFER) -m -e -o ct -p ref.bib | $(PIC) | $(TBL) | $(EQN) | \
 		$(ROFF) -meps -mtbl -mkeep -mfa -msrefs | $(POST) -pa4 >$@
 
 %.pdf: %.ps

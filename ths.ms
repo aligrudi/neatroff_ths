@@ -158,9 +158,6 @@
 
 .S_ - "فهرست مراجع"
 .rn IP.en IP
-.EQ
-delim off
-.EN
 .nr VS -5
 .[
 $LIST$
