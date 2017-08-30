@@ -6,7 +6,16 @@
 .nr ths.s2 0		\" current subsection number (depth 2)
 .nr ths.f 0		\" current figure number
 .nr ths.t 0		\" current table number
-.ds fa.cl #442222	\" section header colour
+.nr tblbrdrsz 40
+.nr tblhorisz 25
+.pl 11.5i
+.nr PS 12
+.nr VS \n(PS+11
+.nr PO 1i
+.nr LL 6.3i
+.ds fa.cl #442222
+.ds ths.head
+.ds ths.chap
 .\" Managing internal references
 .de ths.doubledef
 .	if \\n[\\$1.d] .tm \\n(.F:\\n(.c: \\$1 redefined
@@ -22,23 +31,32 @@
 ..
 .de S0
 .	keepeof
+.	br
+.	ds ths.chap "
 .	if \\n[ths.s] .bp
+.	nr ths.pg 0
 .	nr ths.s +1
 .	nr ths.s1 0
 .	nr ths.s2 0
 .	nr ths.f 0
 .	nr ths.t 0
-.	ds rref "__\\$1
-.	if \\n[ths.idx] .S0.ref "\\$1" "\\$2"
 .	TL
 .	ad r
-.	ps 30
+.	rs
+.	if !""\\$1" \{\
+.		ds rref "__\\$1
+.		if \\n[ths.idx] .S0.ref "\\$1" "\\$2"
+.		sp |2.5i
+.		ps 36
 فصل \\*[\\*[rref]]
-.	sp
-.	ps 40
+.	\}
+.	sp |3.5i
+.	ps 32
 .	ad c
-\\$2\s0
-.	sp 4
+\\$2
+.	ds ths.chap "\\$2
+.	bp
+.	nr ths.pg 1
 .	LP
 ..
 .de S_
@@ -121,6 +139,19 @@
 \&
 ..
 .chop ref
+.de HD.pg
+.	ev ths.hd
+.	sp
+.	if ""\\*[ths.chap]" .sp 1.5
+.	if !""\\*[ths.chap]" \{\
+.		tl '\\*[ths.head]''\\*[ths.chap]'
+.		sp -.5
+\l'\\n[.l]u'
+.		br
+.	\}
+.	sp
+.	ev
+..
 .de FT.pg
 .	if \\n[ths.pg]=0 'tl '''
 .	if \\n[ths.pg]=1 'tl ''\>%\<''
@@ -131,6 +162,19 @@
 .	ta \\n(.luR
 \\$1\h'1n' \a \h'1n'\\*[en "\\$2"]
 ..
+.de ths.en2en
+.	nf
+.	ta \\n(.luR
+\\*[en "\\$2"]\h'1n' \a \h'1n'\\*[en "\\$1"]
+..
+.\" Initializing the header environment
+.di ths.hd
+.ev ths.hd
+.LP
+.vs \n[PS]
+.nf
+.ev
+.di
 .\" Abjad letters
 .ds abjad.1 "الف
 .ds abjad.2 "ب
@@ -163,3 +207,4 @@ chartype ord .
 chartype bin \(rs
 delim $$
 .EN
+.blm PP

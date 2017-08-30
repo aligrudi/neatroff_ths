@@ -1,18 +1,28 @@
 .so ths.tmac
 .nr ths.pg 0
+.HD
 .EQ
 delim off
 .EN
 .\" The title page
+.>>
+.rs
+.sp |.7i
+.ad l
+.EPS "nit.eps" C .9i
+.br
 .ad ce
 .<<
-.sp |2i
+.sp |2.5i
+.ft HD
+.ps 14
+دانشکده برق و کامپیوتر
+.sp |4.4i
 .ps 24
 .vs 30
-.ft HD
 بسته‌ی نیتراف برای نگارش پایان‌نامه
-.sp |5i
-.ps 12
+.sp |6.3i
+.ps 14
 علی غلامی رودی
 .sp |9i
 زمستان \*[num 1395]
@@ -61,3 +71,7 @@ delim off
 ..
 .so .ths.tr
 .rm ths.t1
+.bp
+.S_ - "فهرست نمادها"
+.LP
+.ths.en2en "OS"   "Operating System"
