@@ -9,13 +9,13 @@ delim off
 .rs
 .sp |.7i
 .ad l
-.EPS "nit.eps" C .9i
+.EPS "nit.eps" C 1.15i
 .br
 .ad ce
 .<<
-.sp |2.5i
+.sp |2.4i
 .ft HD
-.ps 14
+.ps 12
 دانشکده برق و کامپیوتر
 .sp |4.4i
 .ps 24
