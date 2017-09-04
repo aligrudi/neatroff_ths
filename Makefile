@@ -1,6 +1,5 @@
 # BASE should point to neatroff_make/
 BASE = $(PWD)/..
-BASE = /root/l/neatroff_make/
 ROFF = $(BASE)/neatroff/roff
 POST = $(BASE)/neatpost/post
 EQN = $(BASE)/neateqn/eqn
