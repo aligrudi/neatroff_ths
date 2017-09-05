@@ -171,6 +171,6 @@ $LIST$
 .nr VS +5
 .S0 "" "واژه‌نامه‌ی فارسی به انگلیسی"
 .LP
-.ths.en2en "تیراف"   "Troff"
+.ths.en2fa "تیراف"   "Troff"
 .ths.en2fa "نیتراف"  "Neatroff"
 .ths.en2fa "نیتپست"  "Neatpost"
