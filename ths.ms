@@ -49,7 +49,7 @@
 .KF
 .nr VS -4
 .T1 ttbl "استفاده از بسته‌ی \*[en tbl] برای کشیدن جدول"
-.tblbeg 4.7i 0
+.tblbeg 9c 0
 .	tblbox 1 1 1
 .	tblmac fa.tblhd fa.tblhd
 .	tblrow "توصیف" "عنوان"
@@ -99,7 +99,7 @@
 .KF
 .T1 tmaclist "فهرست ماکروها"
 .nr VS -8
-.tblbeg 5i 0
+.tblbeg 10c 0
 .	tblbox 1 1 1
 .	tblmac fa.tblhd fa.tblhd
 .	tblrow "توصیف" "نام ماکرو"
@@ -130,7 +130,7 @@
 .KF
 .T1 treglist "فهرست رجیسترهای عددی"
 .nr VS -8
-.tblbeg 5i 0
+.tblbeg 10c 0
 .	tblbox 1 1 1
 .	tblmac fa.tblhd fa.tblhd
 .	tblrow "توصیف" "نام رجیستر"
@@ -159,18 +159,12 @@
 نیتراف نسبت به نسخه‌ی اصلی تیراف را بیان می‌کند و
 مستند \*[en "http://litcave.rudi.ir/neatfarsi.pdf"] برخی
 از درخواست‌های نیتراف را که برای متن فارسی مفید هستند، معرفی
-می‌کند.
+می‌نماید.
 
-
-.S0 "" "مراجع"
+.S0 "" "فهرست مراجع"
 .rn IP.en IP
 .nr VS -5
 .[
 $LIST$
 .]
 .nr VS +5
-.S0 "" "واژه‌نامه‌ی فارسی به انگلیسی"
-.LP
-.ths.en2fa "تیراف"   "Troff"
-.ths.en2fa "نیتراف"  "Neatroff"
-.ths.en2fa "نیتپست"  "Neatpost"

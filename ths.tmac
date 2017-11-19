@@ -1,3 +1,4 @@
+.\" A Macro Package for Farsi Theses
 .\" Internal registers
 .nr ths.in 0		\" current indentation
 .nr ths.pg 1		\" page style (0: off, 1: numbers, 2: abjad)
@@ -8,11 +9,11 @@
 .nr ths.t 0		\" current table number
 .nr tblbrdrsz 40
 .nr tblhorisz 25
-.pl 11.5i
 .nr PS 12
 .nr VS \n(PS+11
-.nr PO 1i
-.nr LL 6.3i
+.nr PO 2.2c
+.nr LL 17c-4.4c
+.pl 24.5c
 .ds fa.cl #442222
 .ds ths.head
 .ds ths.chap
@@ -43,27 +44,27 @@
 .	TL
 .	ad r
 .	rs
+.	sp |5.8c
+.	ps 20
 .	if !""\\$1" \{\
 .		ds rref "__\\$1
 .		if \\n[ths.idx] .S0.ref "\\$1" "\\$2"
-.		sp |2.5i
-.		ps 36
-فصل \\*[\\*[rref]]
+\\*[\\*[rref]].
 .	\}
-.	sp |3.5i
-.	ps 32
-.	ad c
 \\$2
 .	ds ths.chap "\\$2
-.	bp
 .	nr ths.pg 1
-.	LP
+.	PP
 ..
 .de S_
 .	keepeof
-.	if \\n[ths.s] .bp
-.	RT
-.	TL "\\$2"
+.	TL
+.	ad r
+.	rs
+.	sp |3.5c
+.	ps \\n(PS+4
+\\$2
+.	PP
 ..
 .de S1.ref
 .	ds rref "__\\$1
@@ -72,13 +73,18 @@
 .	tm .ds \\*[rref] \\*[rdef]
 .	tm .ths.s1 \\n% "\\*[rdef]" "\\$2"
 ..
+.	rn SH SH__
+.de SH
+.	SH__ "\\$1"
+.	PP
+..
 .de S1
 .	RT
 .	nr ths.s1 +1
 .	nr ths.s2 0
 .	if \\n[ths.idx] .S1.ref "\\$1" "\\$2"
 .	ds rref "__\\$1
-.	SH "\\*[\\*[rref]]\h'1n'\\$2"
+.	SH "\\*[\\*[rref]]. \\$2"
 ..
 .de S2.ref
 .	ds rref "__\\$1
@@ -92,7 +98,7 @@
 .	nr ths.s2 +1
 .	if \\n[ths.idx] S2.ref "\\$1" "\\$2"
 .	ds rref "__\\$1
-.	SH "\\*[\\*[rref]]\h'1n'\\$2"
+.	SH "\\*[\\*[rref]]. \\$2"
 ..
 .\" Figure caption
 .de F1.ref
@@ -110,7 +116,7 @@
 .	ad c
 .	ps \\n(PS-2
 .	vs \\n(VS-4
-شکل \\*[\\*[rref]]\h'2n'
+شکل \\*[\\*[rref]].
 \\$2
 ..
 .\" Table caption
@@ -128,7 +134,7 @@
 .	ds rref "__\\$1
 .	ad c
 .	ps \\n(PS-2
-جدول \\*[\\*[rref]]\h'2n'
+جدول \\*[\\*[rref]].
 \\$2
 ..
 .\" Internal references
@@ -141,26 +147,35 @@
 .chop ref
 .de HD.pg
 .	ev ths.hd
-.	sp
-.	if ""\\*[ths.chap]" .sp 1.5
-.	if !""\\*[ths.chap]" \{\
-.		tl '\\*[ths.head]''\\*[ths.chap]'
+.	if \\n[ths.pg]=0 .ds __pg 
+.	if \\n[ths.pg]=1 .ds __pg \>%\<
+.	if \\n[ths.pg]=2 .ds __pg \\*[abjad.\\n%]
+.	if \\n[ths.pg]=0 .sp |3.5c
+.	if ""\\*[ths.chap]" .sp |3.5c
+.	if \\n[ths.pg] .if !""\\*[ths.chap]" \{\
+.		sp |2.5c
+.		if o .tl '\\*[ths.head]''\\*[__pg]'
+.		if e .tl '\\*[__pg]''\\*[ths.chap]'
 .		sp -.5
 \l'\\n[.l]u'
-.		br
+.		sp |3.5c-(\\n(VSp/2u)
 .	\}
-.	sp
 .	ev
 ..
 .de FT.pg
-.	if \\n[ths.pg]=0 'tl '''
-.	if \\n[ths.pg]=1 'tl ''\>%\<''
-.	if \\n[ths.pg]=2 'tl ''\\*[abjad.\\n%]''
 ..
-.de ths.en2fa
+.de ths.fa2fa
+.	nf
+.	ta \\n(.luR
+\\$1\h'1n' \a \h'1n'\\$2
+..
+.de ths.fa2en
 .	nf
 .	ta \\n(.luR
 \\$1\h'1n' \a \h'1n'\\*[en "\\$2"]
+..
+.de ths.en2fa
+.	ths.fa2en "\\$2" "\\$1"
 ..
 .de ths.en2en
 .	nf
@@ -171,7 +186,8 @@
 .di ths.hd
 .ev ths.hd
 .LP
-.vs \n[PS]
+.ps \n[PS]-2
+.vs \n[PS]-2
 .nf
 .ev
 .di
@@ -194,6 +210,172 @@
 .ds abjad.16 "ع
 .ds abjad.17 "ف
 .ds abjad.18 "ص
+.de ths.titlepage
+.	nr ths.pg 0
+.	HD
+.	>>
+.	rs
+.	sp |2c
+.	ad l
+.	EPS "\\*[ths.tl.logo]" C 1.15i
+.	br
+.	ad c
+.	<<
+.	sp |6c
+.	ft HD
+.	ps 12
+\\*[ths.tl.department]
+.	sp |7.5c
+.	ps 10
+\\*[ths.tl.major]
+.	sp |9.5c
+.	ps 24
+.	vs 14
+\\*[ths.tl.title]
+.	sp |11c
+.	ps 9
+نگارش
+.	sp .3c
+.	ps 14
+\\*[ths.tl.author]
+.	sp |14c
+.	if !""\\*[ths.tl.supervisor]" \{\
+.		ps 9
+استاد راهنما
+.		sp .3c
+.		ps 14
+\\*[ths.tl.supervisor]
+.	\}
+.	sp |17c
+.	if !""\\*[ths.tl.advisor]" \{\
+.		ps 9
+استاد مشاور
+.		sp .3c
+.		ps 14
+\\*[ths.tl.advisor]
+.	\}
+.	ps 14
+.	sp |20c
+\\*[ths.tl.date]
+..
+.de ths.dedication
+.	bp
+.	S_ - "صفحه‌ی تقدیم"
+.	PP
+..
+.de ths.acknowledgement
+.	bp
+.	S_ - "صفحه‌ی سپاسگزاری"
+.	PP
+..
+.de ths.abstract
+.	bp
+.	S_ - "چکیده"
+.	PP
+..
+.de ths.toc.s0
+\f(FB\\$2   \\$3\fP\h'1n'  \a\>\\$1\<
+..
+.de ths.toc.s1
+\h'2n'\\$2   \\$3\h'1n'  \a\>\\$1\<
+..
+.de ths.toc.s2
+\h'4n'\\$2   \\$3\h'1n'  \a\>\\$1\<
+..
+.de ths.toc.f1
+\\$2 \\$3  \a\>\\$1\<
+..
+.de ths.toc.t1
+\\$2 \\$3  \a\>\\$1\<
+..
+.de ths.toc
+.	bp
+.	S_ - "فهرست نوشتار"
+.	LP
+.	nf
+.	ta \\n(.luR
+.	rn ths.toc.s0 ths.s0
+.	rn ths.toc.s1 ths.s1
+.	rn ths.toc.s2 ths.s2
+.	so .ths.tr
+.	rm ths.s0
+.	rm ths.s1
+.	rm ths.s2
+..
+.de ths.toc.figures
+.	bp
+.	S_ - "فهرست شکل‌ها"
+.	LP
+.	nf
+.	ta \\n(.luR
+.	rn ths.toc.f1 ths.f1
+.	so .ths.tr
+.	rm ths.f1
+..
+.de ths.toc.tables
+.	bp
+.	S_ - "فهرست جدول‌ها"
+.	LP
+.	nf
+.	ta \\n(.luR
+.	rn ths.toc.t1 ths.t1
+.	so .ths.tr
+.	rm ths.t1
+..
+.de ths.symbols
+.	bp
+.	S_ - "فهرست کوته‌نوشت‌ها"
+.	LP
+..
+.de ths.titlepage.en
+.	nr ths.pg 0
+.	bp
+.	LP
+.	>>
+.	rs
+.	sp |2c
+.	ad l
+.	EPS "\\*[ths.tl.logo.en]" C 1.15i
+.	br
+.	ad c
+.	sp |6c
+.	ft B
+.	ps 12
+\\*[ths.tl.department.en]
+.	sp |7.5c
+.	ps 10
+\\*[ths.tl.major.en]
+.	sp |9.5c
+.	ps 24
+.	vs 24
+\\*[ths.tl.title.en]
+.	sp |12c
+.	vs 12
+.	ps 9
+By
+.	sp .3c
+.	ps 14
+\\*[ths.tl.author.en]
+.	sp |14.5c
+.	if !""\\*[ths.tl.supervisor.en]" \{\
+.		ps 9
+Supervisor
+.		sp .3c
+.		ps 14
+\\*[ths.tl.supervisor.en]
+.	\}
+.	sp |17c
+.	if !""\\*[ths.tl.advisor.en]" \{\
+.		ps 9
+Advisor
+.		sp .3c
+.		ps 14
+\\*[ths.tl.advisor.en]
+.	\}
+.	ps 14
+.	sp |20c
+\\*[ths.tl.date.en]
+..
 .so .ths.tr
 .EQ
 grfont CMR

@@ -1,9 +1,9 @@
 NEATROFF THS PACKAGE
 ====================
 
-The thesis is divided into two parts: ths.ms contains thesis
-chapters and toc.ms the first few pages (title and table
-of contents).
+The thesis is divided into three parts: ths.ms for thesis
+chapters and fm.ms for the front matter and bm.ms for the
+back matter.
 
 To use this package, Neatroff has to be set up first:
 

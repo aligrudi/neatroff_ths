@@ -10,25 +10,34 @@ SOIN = $(BASE)/soin/soin
 JOIN = $(BASE)/roffjoin/roffjoin
 SHAPE = $(BASE)/shape/shape
 
-all: ths.pdf toc.pdf
+ROFFOPTS = -mps -meps -mtbl -mkeep -mfa -msrefs
+POSTOPTS = -p1700x2450
+
+all: ths.pdf fm.pdf bm.pdf
 
 ths.ps: ths.ms ths.tmac
 	@echo "Indexing labels in ths.ms"
 	@cat $< | $(SOIN) | $(SHAPE) | \
 		$(REFER) -m -e -o ct -p ref.bib | $(PIC) | $(TBL) | $(EQN) | \
-		$(ROFF) -rths.idx=1 -meps -mtbl -mkeep -mfa -msrefs 2>&1 1>/dev/null | \
+		$(ROFF) -rths.idx=1 $(ROFFOPTS) 2>&1 1>/dev/null | \
 		tee .ths.err | sed '/^\./d'
 	@sed '/^\./p; d' <.ths.err >.ths.tr
 	@echo "Generating ths.ps"
 	@cat $< | $(SOIN) | $(SHAPE) | \
 		$(REFER) -m -e -o ct -p ref.bib | $(PIC) | $(TBL) | $(EQN) | \
-		$(ROFF) -meps -mtbl -mkeep -mfa -msrefs | $(POST) -pa4 >$@
+		$(ROFF) $(ROFFOPTS) | $(POST) $(POSTOPTS) >$@
 
-toc.ps: toc.ms ths.ps
-	@echo "Generating toc.ps"
-	@cat toc.ms | $(SOIN) | $(SHAPE) | \
+fm.ps: fm.ms ths.ps
+	@echo "Generating fm.ps"
+	@cat fm.ms | $(SOIN) | $(SHAPE) | \
 		$(REFER) -m -e -o ct -p ref.bib | $(PIC) | $(TBL) | $(EQN) | \
-		$(ROFF) -meps -mtbl -mkeep -mfa -msrefs | $(POST) -pa4 >$@
+		$(ROFF) $(ROFFOPTS) | $(POST) $(POSTOPTS) >$@
+
+bm.ps: bm.ms ths.tmac
+	@echo "Generating bm.ps"
+	@cat bm.ms | $(SOIN) | $(SHAPE) | \
+		$(REFER) -m -e -o ct -p ref.bib | $(PIC) | $(TBL) | $(EQN) | \
+		$(ROFF) $(ROFFOPTS) | $(POST) $(POSTOPTS) >$@
 
 %.pdf: %.ps
 	@echo "Generating $@"
