@@ -7,6 +7,7 @@
 .nr ths.s2 0		\" current subsection number (depth 2)
 .nr ths.f 0		\" current figure number
 .nr ths.t 0		\" current table number
+.nr ths.e 0		\" current equation number
 .nr tblbrdrsz 40
 .nr tblhorisz 25
 .nr PS 12
@@ -41,6 +42,7 @@
 .	nr ths.s2 0
 .	nr ths.f 0
 .	nr ths.t 0
+.	nr ths.e 0
 .	TL
 .	ad r
 .	rs
@@ -136,6 +138,27 @@
 .	ps \\n(PS-2
 جدول \\*[\\*[rref]].
 \\$2
+..
+.\" Equations
+.de E1.ref
+.	ds rref "__\\$1
+.	ds rdef "\>\\n[ths.e]-\\n[ths.s]\<
+.	ths.doubledef \\*[rref]
+.	tm .ds \\*[rref] "\\*[rdef]
+..
+.rn EQ __EQ
+.rn EN __EN
+.de EQ
+.	ie "\\$1"" .__EQ
+.	el \{\
+.		nr ths.e +1
+.		if \\n[ths.idx] .E1.ref "\\$1"
+.		ds rref "__\\$1
+.		__EQ "\<\f(FR(\\*[\\*[rref]])\fP\>"
+.	\}
+..
+.de EN
+.	__EN
 ..
 .\" Internal references
 .de ref
