@@ -168,6 +168,57 @@
 \&
 ..
 .chop ref
+.\" English Citations
+.de ct.0
+- \\$1
+..
+.chop ct.0
+.de ct.1
+\\$3
+..
+.chop ct.1
+.de ct.2
+\\$3 and \\$4
+..
+.chop ct.2
+.de ct.3
+\\$3, \\$4, and \\$5
+..
+.chop ct.3
+.de ct.n
+\\$3 et al.
+..
+.chop ct.n
+.de ct
+)\fR\>\\*[ct.\\?'0\\$2<4@\\$2@n' "\\$1" "\\$2" "\\$3" "\\$4" "\\$5"] \\$1\fP\<(
+..
+.chop ct
+.\" English Citations
+.de ctfa.0
+-
+..
+.chop ctfa.0
+.de ctfa.1
+\\$3
+..
+.chop ctfa.1
+.de ctfa.2
+\\$3 و \\$4
+..
+.chop ctfa.2
+.de ctfa.3
+\\$3، \\$4، و \\$5
+..
+.chop ctfa.3
+.de ctfa.n
+\\$3 و دیگران
+..
+.chop ctfa.n
+.de ctfa
+)\\*[ctfa.\\?'0\\$2<4@\\$2@n' "\\$1" "\\$2" "\\$3" "\\$4" "\\$5"] \>\\$1\<(
+..
+.chop ctfa
+.\" Page header and footer
 .de HD.pg
 .	ev ths.hd
 .	if \\n[ths.pg]=0 .ds __pg 
@@ -177,8 +228,8 @@
 .	if ""\\*[ths.chap]" .sp |3.5c
 .	if \\n[ths.pg] .if !""\\*[ths.chap]" \{\
 .		sp |2.5c
-.		if o .tl '\\*[ths.head]''\\*[__pg]'
-.		if e .tl '\\*[__pg]''\\*[ths.chap]'
+.		if o .tl '\\*[ths.chap]''\\*[__pg]'
+.		if e .tl '\\*[__pg]''\\*[ths.head]'
 .		sp -.5
 \l'\\n[.l]u'
 .		sp |3.5c-(\\n(VSp/2u)
@@ -398,6 +449,100 @@ Advisor
 .	ps 14
 .	sp |20c
 \\*[ths.tl.date.en]
+..
+.\" Bibliography
+.\" Journal articles
+.de [1
+.	ft R
+.	>>
+.	ad l
+\\*([A.
+\\*([D.
+\(lq\\*([T.\(rq
+\fI\\*([J\fP
+\\*([V\c
+.	if !"\\*([N"" \& (\\*([N)\c
+.	if !"\\*([P"" \&:\\*([P\c
+\&.
+..
+.de [1fa
+.	char , ،
+\\*([A.
+.	char ,
+\>\\*([D\<.
+»\\*([T.«
+\\*([J
+\>\\*([V\<\c
+.	if !"\\*([N"" \& )\>\\*([N\<(\c
+.	char \- \<-\>
+.	if !"\\*([P"" \&:\>\\*([P\<\c
+.	char \-
+\&.
+..
+.\" Books
+.de [2
+.	ft R
+.	>>
+.	ad l
+\\*([A.
+\\*([D.
+\fI\\*([T\fP.
+\\*([I.
+..
+.de [2fa
+.	char , ،
+\\*([A.
+.	char ,
+\>\\*([D\<.
+\f(FI\\*([T\fP.
+\\*([I.
+..
+.\" Articles in books
+.de [3
+.	ft R
+.	>>
+.	ad l
+\\*([A.
+\\*([D.
+\(lq\\*([T.\(rq
+In \fI\\*([B\fP
+.	if !"\\*([P"" \& \\*([P
+\&.
+.	if !"\\*([I"" \& \\*([I.
+..
+.de [3fa
+.	char , ،
+\\*([A.
+.	char ,
+\>\\*([D\<.
+»\\*([T.«
+در \f(FI\\*([B\fP\c
+.	if !"\\*([E"" ، ویراسته‌ی \\*([E\c
+.	char \- \<-\>
+.	if !"\\*([P"" ، \>\\*([P\<\c
+.	char \-
+\&.
+.	if !"\\*([I"" \& \\*([I.
+..
+.de ]-
+.	rm [V [P [A [T
+.	rm [N [C [B [O
+.	rm [R [I [E [D
+.	rm [G [% [H
+..
+.de ][
+.	LP
+.	in 2n
+.	in2 2n
+.	ti -2n
+.	ti2 -2n
+.	[\\$1\\*([H
+..
+.de ]<
+.	LP
+..
+.de ]>
+.	sp
 ..
 .so .ths.tr
 .EQ
