@@ -12,7 +12,7 @@ SHAPE = $(BASE)/shape/shape
 
 ROFFOPTS = -mps -meps -mtbl -mkeep -mfa
 POSTOPTS = -p1700x2450
-REFROPTS = -e -o ct,ctfa -a -p ths.bib
+REFROPTS = -e -o ct,ctfa -a -sa -p ths.bib
 
 all: ths.pdf fm.pdf bm.pdf
 
