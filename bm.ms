@@ -2,6 +2,8 @@
 .so ths.tmac
 .S_ - "واژه‌نامه‌ی فارسی به انگلیسی"
 .LP
+.ps \n(PS-2
+.vs \n(VS-3
 .ths.fa2en "تیراف"   "Troff"
 .ths.fa2en "نیتراف"  "Neatroff"
 .ths.fa2en "نیتپست"  "Neatpost"
