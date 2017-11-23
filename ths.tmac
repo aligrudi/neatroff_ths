@@ -1,4 +1,7 @@
 .\" A Macro Package for Farsi Theses
+.if \n[ths.read] .bp
+.if \n[ths.read] .ig __eof
+.nr ths.read 1
 .\" Internal registers
 .nr ths.in 0		\" current indentation
 .nr ths.pg 1		\" page style (0: off, 1: numbers, 2: abjad)
@@ -8,6 +11,8 @@
 .nr ths.f 0		\" current figure number
 .nr ths.t 0		\" current table number
 .nr ths.e 0		\" current equation number
+.ds ths.idxfile ".ths.idx
+.ds ths.fmpfile ".ths.fmp
 .fp - FR IRZar
 .fp - FB IRZarBold
 .fp - FI IRZarIranic
@@ -40,8 +45,10 @@
 .	ds rref "__\\$1
 .	ds rdef "\>\\n[ths.s]\<
 .	ths.doubledef \\*[rref]
-.	tm .ds \\*[rref] \\*[rdef]
-.	tm .ths.s0 \\n% "\\*[rdef]" "\\$2"
+.	am ths.idx __eom
+.		ds \\*[rref] \\*[rdef]
+.		ths.s0 \\n% "\\*[rdef]" "\\$2"
+.	__eom
 ..
 .de S0
 .	keepeof
@@ -84,10 +91,12 @@
 .	ds rref "__\\$1
 .	ds rdef "\>\\n[ths.s]\<-\>\\n[ths.s1]\<
 .	ths.doubledef \\*[rref]
-.	tm .ds \\*[rref] \\*[rdef]
-.	tm .ths.s1 \\n% "\\*[rdef]" "\\$2"
+.	am ths.idx __eom
+.		ds \\*[rref] \\*[rdef]
+.		ths.s1 \\n% "\\*[rdef]" "\\$2"
+.	__eom
 ..
-.	rn SH SH__
+.rn SH SH__
 .de SH
 .	SH__ "\s-2\\$1\s+2"
 .	PP
@@ -104,8 +113,10 @@
 .	ds rref "__\\$1
 .	ds rdef "\>\\n[ths.s]\<-\>\\n[ths.s1]\<-\>\\n[ths.s2]\<
 .	ths.doubledef \\*[rref]
-.	tm .ds \\*[rref] \\*[rdef]
-.	tm .ths.s2 "\\n%" "\\*[rdef]" "\\$2"
+.	am ths.idx __eom
+.		ds \\*[rref] \\*[rdef]
+.		ths.s2 "\\n%" "\\*[rdef]" "\\$2"
+.	__eom
 ..
 .de S2
 .	RT
@@ -119,8 +130,10 @@
 .	ds rref "__\\$1
 .	ds rdef "\>\\n[ths.s]\<-\>\\n[ths.f]\<
 .	ths.doubledef \\*[rref]
-.	tm .ds \\*[rref] "\\*[rdef]
-.	tm .ths.f1 \\n% "\\*[rdef]" "\\$2"
+.	am ths.idx __eom
+.		ds \\*[rref] "\\*[rdef]
+.		ths.f1 \\n% "\\*[rdef]" "\\$2"
+.	__eom
 ..
 .de F1
 .	RT
@@ -138,8 +151,10 @@
 .	ds rref "__\\$1
 .	ds rdef "\>\\n[ths.s]\<-\>\\n[ths.t]\<
 .	ths.doubledef \\*[rref]
-.	tm .ds \\*[rref] "\\*[rdef]
-.	tm .ths.t1 \\n% "\\*[rdef]" "\\$2"
+.	am ths.idx __eom
+.		ds \\*[rref] "\\*[rdef]
+.		ths.t1 \\n% "\\*[rdef]" "\\$2"
+.	__eom
 ..
 .de T1
 .	RT
@@ -156,7 +171,9 @@
 .	ds rref "__\\$1
 .	ds rdef "\>\\n[ths.e]-\\n[ths.s]\<
 .	ths.doubledef \\*[rref]
-.	tm .ds \\*[rref] "\\*[rdef]
+.	am ths.idx __eom
+.		ds \\*[rref] "\\*[rdef]
+.	__eom
 ..
 .rn EQ __EQ
 .rn EN __EN
@@ -369,19 +386,24 @@
 .	PP
 ..
 .de ths.toc.s0
-\f(FB\\$2   \\$3\fP\h'1n'  \a\>\\$1\<
+.	nr pg \\$1+\\n[ths.fmpages]
+\f(FB\\$2   \\$3\fP\h'1n'  \a\>\\n[pg]\<
 ..
 .de ths.toc.s1
-\h'2n'\\$2   \\$3\h'1n'  \a\>\\$1\<
+.	nr pg \\$1+\\n[ths.fmpages]
+\h'2n'\\$2   \\$3\h'1n'  \a\>\\n[pg]\<
 ..
 .de ths.toc.s2
-\h'4n'\\$2   \\$3\h'1n'  \a\>\\$1\<
+.	nr pg \\$1+\\n[ths.fmpages]
+\h'4n'\\$2   \\$3\h'1n'  \a\>\\n[pg]\<
 ..
 .de ths.toc.f1
-\\$2 \\$3  \a\>\\$1\<
+.	nr pg \\$1+\\n[ths.fmpages]
+\\$2 \\$3  \a\>\\n[pg]\<
 ..
 .de ths.toc.t1
-\\$2 \\$3  \a\>\\$1\<
+.	nr pg \\$1+\\n[ths.fmpages]
+\\$2 \\$3  \a\>\\n[pg]\<
 ..
 .de ths.toc
 .	bp
@@ -394,7 +416,7 @@
 .	rn ths.toc.s2 ths.s2
 .	ps \\n(PS-2
 .	vs \\n(VS-3
-.	so .ths.tr
+.	so \\*[ths.idxfile]
 .	rm ths.s0
 .	rm ths.s1
 .	rm ths.s2
@@ -408,7 +430,7 @@
 .	rn ths.toc.f1 ths.f1
 .	ps \\n(PS-2
 .	vs \\n(VS-3
-.	so .ths.tr
+.	so \\*[ths.idxfile]
 .	rm ths.f1
 ..
 .de ths.toc.tables
@@ -420,7 +442,7 @@
 .	rn ths.toc.t1 ths.t1
 .	ps \\n(PS-2
 .	vs \\n(VS-3
-.	so .ths.tr
+.	so \\*[ths.idxfile]
 .	rm ths.t1
 ..
 .de ths.symbols
@@ -596,7 +618,20 @@ In \fI\\*([B\fP\c
 .de ]>
 .	sp
 ..
-.so .ths.tr
+.\" End of front matter
+.de ths.fm.eof
+.	de ths.fmpages __eom
+.		nr ths.fmpages \\n%
+.	__eom
+.	co ths.fmpages >\\*[ths.fmpfile]
+..
+.\" End of thesis contents; write indices
+.de ths.eof
+.	if \\n[ths.idx] .co ths.idx >\\*[ths.idxfile]
+..
+.if !\n[ths.idx] .so \*[ths.idxfile]
+.if \n[ths.all] .so \*[ths.fmpfile]
+.em ths.eof
 .EQ
 grfont CMR
 gfont CMMI
@@ -610,3 +645,4 @@ chartype bin \(rs
 delim $$
 .EN
 .blm PP
+.__eof

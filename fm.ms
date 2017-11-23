@@ -37,3 +37,4 @@
 .ths.en2en "OS"     "Operating System"
 .ths.toc.tables
 .ths.toc.figures
+.ths.fm.eof

@@ -14,15 +14,13 @@ ROFFOPTS = -mps -meps -mtbl -mkeep -mfa
 POSTOPTS = -p1700x2450
 REFROPTS = -e -o ct,ctfa -a -sa -p ths.bib
 
-all: ths.pdf fm.pdf bm.pdf
+all: all.pdf
 
 ths.ps: ths.ms ths.tmac ths.bib
 	@echo "Indexing labels in ths.ms"
 	@cat $< | $(SOIN) | $(REFR) $(REFROPTS) | \
 		$(SHAPE) | $(PIC) | $(TBL) | $(EQN) | \
-		$(ROFF) -rths.idx=1 $(ROFFOPTS) 2>&1 1>/dev/null | \
-		tee .ths.err | sed '/^\./d'
-	@sed '/^\./p; d' <.ths.err >.ths.tr
+		$(ROFF) -rths.idx=1 $(ROFFOPTS) 1>/dev/null
 	@echo "Generating ths.ps"
 	@cat $< | $(SOIN) | $(REFR) $(REFROPTS) | \
 		$(SHAPE) | $(PIC) | $(TBL) | $(EQN) | \
@@ -39,6 +37,12 @@ bm.ps: bm.ms ths.tmac
 	@cat bm.ms | $(SOIN) | $(REFR) $(REFROPTS) | \
 		$(SHAPE) | $(PIC) | $(TBL) | $(EQN) | \
 		$(ROFF) $(ROFFOPTS) | $(POST) $(POSTOPTS) >$@
+
+all.ps: ths.ps fm.ps
+	@echo "Generating all.ps"
+	@(cat fm.ms ths.ms bm.ms) | $(SOIN) | $(REFR) $(REFROPTS) | \
+		$(SHAPE) | $(PIC) | $(TBL) | $(EQN) | \
+		$(ROFF) $(ROFFOPTS) -rths.all=1 | $(POST) $(POSTOPTS) >$@
 
 %.pdf: %.ps
 	@echo "Generating $@"
