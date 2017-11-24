@@ -1,4 +1,5 @@
 .\" A Macro Package for Farsi Theses
+.if \n[ths.read] .ds ths.chap "
 .if \n[ths.read] .bp
 .if \n[ths.read] .ig __eof
 .nr ths.read 1
@@ -73,12 +74,13 @@
 \\*[\\*[rref]].
 .	\}
 \\$2
-.	ds ths.chap "\\$2
+.	ds ths.chap "\\*[ths.chap.\\n[ths.s]]: \\$2
 .	nr ths.pg 1
 .	PP
 ..
 .de S_
 .	keepeof
+.	ds ths.chap "
 .	TL
 .	ad r
 .	rs
@@ -252,13 +254,13 @@
 .	ev ths.hd
 .	if \\n[ths.pg]=0 .ds __pg 
 .	if \\n[ths.pg]=1 .ds __pg \>%\<
-.	if \\n[ths.pg]=2 .ds __pg \\*[abjad.\\n%]
+.	if \\n[ths.pg]=2 .ds __pg \\*[ths.abjad.\\n%]
 .	if \\n[ths.pg]=0 .sp |3.5c
 .	if ""\\*[ths.chap]" .sp |3.5c
 .	if \\n[ths.pg] .if !""\\*[ths.chap]" \{\
 .		sp |2.5c
 .		if o .tl '\\*[ths.chap]''\\*[__pg]'
-.		if e .tl '\\*[__pg]''\\*[ths.head]'
+.		if e .tl '\\*[__pg]''\\*[ths.chap]'
 .		sp -.5
 \l'\\n[.l]u'
 .		sp |3.5c-(\\n(VSp/2u)
@@ -295,24 +297,34 @@
 .ev
 .di
 .\" Abjad letters
-.ds abjad.1 "الف
-.ds abjad.2 "ب
-.ds abjad.3 "ج
-.ds abjad.4 "د
-.ds abjad.5 "ه
-.ds abjad.6 "و
-.ds abjad.7 "ز
-.ds abjad.8 "ح
-.ds abjad.9 "ط
-.ds abjad.10 "ی
-.ds abjad.11 "ک
-.ds abjad.12 "ل
-.ds abjad.13 "م
-.ds abjad.14 "ن
-.ds abjad.15 "س
-.ds abjad.16 "ع
-.ds abjad.17 "ف
-.ds abjad.18 "ص
+.ds ths.abjad.1 "الف
+.ds ths.abjad.2 "ب
+.ds ths.abjad.3 "ج
+.ds ths.abjad.4 "د
+.ds ths.abjad.5 "ه
+.ds ths.abjad.6 "و
+.ds ths.abjad.7 "ز
+.ds ths.abjad.8 "ح
+.ds ths.abjad.9 "ط
+.ds ths.abjad.10 "ی
+.ds ths.abjad.11 "ک
+.ds ths.abjad.12 "ل
+.ds ths.abjad.13 "م
+.ds ths.abjad.14 "ن
+.ds ths.abjad.15 "س
+.ds ths.abjad.16 "ع
+.ds ths.abjad.17 "ف
+.ds ths.abjad.18 "ص
+.\" Chapters
+.ds ths.chap.1 "فصل یکم
+.ds ths.chap.2 "فصل دوم
+.ds ths.chap.3 "فصل سوم
+.ds ths.chap.4 "فصل چهارم
+.ds ths.chap.5 "فصل پنجم
+.ds ths.chap.6 "فصل ششم
+.ds ths.chap.7 "فصل هفتم
+.ds ths.chap.8 "فصل هشتم
+.ds ths.chap.9 "فصل نهم
 .de ths.titlepage
 .	nr ths.pg 0
 .	HD
