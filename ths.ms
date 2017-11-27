@@ -1,3 +1,4 @@
+.\" Thesis body
 .so ths.tmac
 .S0 sintro "مقدمه"
 نیتراف\*[fs Neatroff] ابزار بسیار قدرتمندی برای تولید مستند‌های
@@ -38,10 +39,16 @@
 در این بسته، پیش‌پردازشگر \*[en eqn] به شکلی تنظیم شده است
 که رابطه‌های ترکیب شده با متن و رابطه‌های خارج از آن را
 نمایش دهد \*[ct eqn75].  برای مثال، ترکیب شده با متن $δ = a sup 3 + b over c$
-و رابطه‌ی خارج از متن )\*[ref efive](.
-.EQ efive
+و رابطه‌ی خارج از متن )\*[ref eqsum]( در قضیه‌ی \*[ref mainthm].
+.theorem mainthm
+رابطه‌ی زیر برقرار است:
+.EQ eqsum
 (x + y) sup n = sum from i=0 to n left ( pile {n above i} right ) x sup i y sup n-i
 .EN
+.proofbeg
+بدیهی است.
+.proofend
+
 .S1 stab "جدول‌ها
 یکی از روش‌های کشیدن جدول، استفاده از پیش‌پردازشگر \*[en tbl]
 است.  روش دیگر، استفاده از بسته‌ی \*[en tbl] نیتراف است که
