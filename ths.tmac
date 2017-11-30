@@ -173,7 +173,7 @@ delim off
 \\$2
 ..
 .\" Define theorems
-.de thm.ref
+.de H1.ref
 .	ds rref "__\\$1
 .	ds rdef "\>\\n[ths.s]\<-\>\\n[ths.thm]\<
 .	ths.doubledef \\*[rref]
@@ -181,32 +181,24 @@ delim off
 .		ds \\*[rref] "\\*[rdef]
 .	__eom
 ..
-.de ths.thm
-.	de \\$1 __eom
-.		LP
-.		sp
-.		nr ths.thm +1
-.		if \\\\n[ths.idx] .thm.ref "\\\\$1"
-.		ds rref "__\\\\$1
-.		ft FB
-\\$2 \\\\*[\\\\*[rref]].
-.		ft FR
-.	__eom
+.de H1
+.	LP
+.	sp
+.	nr ths.thm +1
+.	if \\n[ths.idx] .H1.ref "\\$1"
+.	ds rref "__\\$1
+.	ft FB
+\\$2 \\*[\\*[rref]].
+.	ft FR
 ..
 .de proofbeg
-.LP
+.	LP
 اثبات.
 ..
 .de proofend
 .	sp -1
 \h'\\n(.lu-1n'\D'p -1n 0 0 -1n 1n 0 0 1n'
 ..
-.ths.thm theorem "قضیه"
-.ths.thm lemma "لم"
-.ths.thm proposition "گزاره"
-.ths.thm conjecture "حدس"
-.ths.thm corollary "نتیجه"
-.ths.thm observation "مشاهده"
 .\" Equations
 .de E1.ref
 .	ds rref "__\\$1
