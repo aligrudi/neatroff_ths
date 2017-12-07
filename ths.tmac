@@ -229,57 +229,20 @@ delim off
 .	if "\\*[__\\$1]"" \l'2n'
 \&
 ..
-.chop ref
 .\" English citations
-.de ct.0
-- \\$1
-..
-.chop ct.0
-.de ct.1
-\\$3
-..
-.chop ct.1
-.de ct.2
-\\$3 and \\$4
-..
-.chop ct.2
-.de ct.3
-\\$3, \\$4, and \\$5
-..
-.chop ct.3
-.de ct.n
-\\$3 et al.
-..
-.chop ct.n
-.de ct
-)\fR\>\\*[ct.\\?'0\\$2<4@\\$2@n' "\\$1" "\\$2" "\\$3" "\\$4" "\\$5"] \\$1\fP\<(
-..
-.chop ct
+.ds ct.0 - \\$1
+.ds ct.1 \\$3
+.ds ct.2 \\$3 and \\$4
+.ds ct.3 \\$3, \\$4, and \\$5
+.ds ct.n \\$3 et al.
+.ds ct )\fR\>\\*[ct.\\?'0\\$2<4@\\$2@n' "\\$1" "\\$2" "\\$3" "\\$4" "\\$5"] \\$1\fP\<(
 .\" Farsi citations
-.de ctfa.0
--
-..
-.chop ctfa.0
-.de ctfa.1
-\\$3
-..
-.chop ctfa.1
-.de ctfa.2
-\\$3 و \\$4
-..
-.chop ctfa.2
-.de ctfa.3
-\\$3، \\$4، و \\$5
-..
-.chop ctfa.3
-.de ctfa.n
-\\$3 و دیگران
-..
-.chop ctfa.n
-.de ctfa
-)\\*[ctfa.\\?'0\\$2<4@\\$2@n' "\\$1" "\\$2" "\\$3" "\\$4" "\\$5"] \>\\$1\<(
-..
-.chop ctfa
+.ds ctfa.0 -
+.ds ctfa.1 \\$3
+.ds ctfa.2 \\$3 و \\$4
+.ds ctfa.3 \\$3، \\$4، و \\$5
+.ds ctfa.n \\$3 و دیگران
+.ds ctfa )\\*[ctfa.\\?'0\\$2<4@\\$2@n' "\\$1" "\\$2" "\\$3" "\\$4" "\\$5"] \>\\$1\<(
 .\" Page header and footer
 .de HD.pg
 .	ev ths.hd
