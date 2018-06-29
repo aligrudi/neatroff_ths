@@ -630,11 +630,11 @@ In \fI\\*([B\fP\c
 .	de ths.fmpages __eom
 .		nr ths.fmpages \\n%
 .	__eom
-.	co ths.fmpages >\\*[ths.fmpfile]
+.	co> ths.fmpages \\*[ths.fmpfile]
 ..
 .\" End of thesis contents; write indices
 .de ths.eof
-.	if \\n[ths.idx] .co ths.idx >\\*[ths.idxfile]
+.	if \\n[ths.idx] .co> ths.idx \\*[ths.idxfile]
 ..
 .if !\n[ths.idx] .so \*[ths.idxfile]
 .if \n[ths.all] .so \*[ths.fmpfile]
