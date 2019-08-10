@@ -111,8 +111,8 @@
 .	tblmac fa.tblhd fa.tblhd
 .	tblrow "توصیف" "نام ماکرو"
 .	tblmac fa.tblfb fa.tblhd
-.	tblrow "عنوان فصل )پارامتر اول برچسب فصل است(" "\*[en S0]"
 .	tblbox 1 0 1
+.	tblrow "عنوان فصل )پارامتر اول برچسب فصل است(" "\*[en S0]"
 .	tblrow "عنوان بخش رده‌ی اول" "\*[en S1]"
 .	tblrow "عنوان بخش رده‌ی دوم" "\*[en S2]"
 .	tblrow "عنوان فصل بدون شماره" "\*[en S_]"
@@ -143,12 +143,11 @@
 .	tblmac fa.tblhd fa.tblhd
 .	tblrow "توصیف" "نام رجیستر"
 .	tblmac fa.tblfb fa.tblhd
-.	tblrow "اندازه‌ی قلم" "\*[en PS]"
 .	tblbox 1 0 1
+.	tblrow "اندازه‌ی قلم" "\*[en PS]"
 .	tblrow "فاصله‌ی بین خطوط" "\*[en VS]"
 .	tblrow "طول خط" "\*[en LL]"
 .	tblrow "شروع خط" "\*[en PO]"
-.	tblbox 1 0 1
 .tblend
 .nr VS +8
 .KE
