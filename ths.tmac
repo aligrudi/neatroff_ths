@@ -639,6 +639,7 @@ In \fI\\*([B\fP\c
 .if !\n[ths.idx] .so \*[ths.idxfile]
 .if \n[ths.all] .so \*[ths.fmpfile]
 .em ths.eof
+.char \[eqn.log] "log
 .EQ
 grfont CMR
 gfont CMMI
@@ -647,6 +648,8 @@ define tsum @{vcenter roman "\N'summationtext'"}@
 define prod @{vcenter roman "\N'productdisplay'"}@
 define tprod @{vcenter roman "\N'producttext'"}@
 define small @size -4@
+define log @{\[eqn.log] $1}@
+chartype op \[eqn.log]
 chartype ord .
 chartype bin \(rs
 delim $$
