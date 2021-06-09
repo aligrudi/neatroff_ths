@@ -636,9 +636,25 @@ In \fI\\*([B\fP\c
 .de ths.eof
 .	if \\n[ths.idx] .co> ths.idx \\*[ths.idxfile]
 ..
+.\" For URLs
+.ds url "\fR\>\m[#348]\\*[post.url "\\$1" \\?'\\n(.$>1@"\\$2"']\m[]\<\f(FR
+.\" Inline R2L URL
+.de ps.urlr2l
+\R'ps._linkh \\w'\\?'\\n(.$>1@\\$2@\\$1'''\
+\R'ps._linkv \\n(.sp'\
+\\?'\\n(.$>1@\\$2@\\$1'\
+\v'+\\n(.sp*2u/10u'\X'link "\\$1" \\n[ps._linkh] -\\n[ps._linkv]'\v'-\\n(.sp*2u/10u'
+..
+.chop ps.urlr2l
+.de urlfa
+\fR\>\m[#348]\\*[ps.urlr2l "\\$1" "\<\f(FR\\$2\fP\>"]\m[]\<\f(FR
+..
+.chop urlfa
+.\" Indexing references
 .if !\n[ths.idx] .so \*[ths.idxfile]
 .if \n[ths.all] .so \*[ths.fmpfile]
 .em ths.eof
+.\" Equations
 .char \[eqn.log] "log
 .EQ
 grfont CMR

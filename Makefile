@@ -11,7 +11,7 @@ SOIN = $(BASE)/soin/soin
 SHAPE = $(BASE)/shape/shape
 
 ROFFOPTS = -F$(BASE) -M$(BASE)/tmac
-ROFFMACS = -mps -meps -mtbl -mkeep -mfa
+ROFFMACS = -mpost -meps -mtbl -mkeep -mfa
 POSTOPTS = -F$(BASE) -p1700x2450
 REFROPTS = -e -a ct,ctfa -sa -p ths.bib
 EQNOPTS  = -c '^~"(),'
