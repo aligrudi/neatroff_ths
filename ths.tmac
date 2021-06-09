@@ -127,7 +127,7 @@ delim off
 .de S2
 .	RT
 .	nr ths.s2 +1
-.	if \\n[ths.idx] S2.ref "\\$1" "\\$2"
+.	if \\n[ths.idx] .S2.ref "\\$1" "\\$2"
 .	ds rref "__\\$1
 .	SH "\\*[\\*[rref]]. \\$2"
 ..
