@@ -7,7 +7,7 @@ back matter.
 
 To use this package, Neatroff has to be set up first:
 
-$ git clone git://github.com/litcave/neatroff_make.git
+$ git clone https://github.com/litcave/neatroff_make.git
 $ cd neatroff_make/
 $ make init_fa
 $ make neat
@@ -15,6 +15,6 @@ $ make neat
 The following commands obtain and initialize the ths
 package in neatroff_make/ths:
 
-$ git clone git://github.com/nit-ce/neatroff_ths.git ths
+$ git clone https://github.com/nit-ce/neatroff_ths.git ths
 $ cd ths
 $ make
